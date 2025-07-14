@@ -1,0 +1,46 @@
+<div class="title">
+  <h1>Lista de Notebooks</h1>
+  <%= link_to 'Novo Notebook', new_notebook_path, class: "btn-new" %>
+</div>
+<div class="table-wrapper">
+  <div class="table-centered">
+    <table>
+      <thead>
+        <tr>
+          <th>Identificação</th>
+          <th>Número Patrimônio</th>
+          <th>Estado</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% (@notebooks || []).each do |notebook| %>
+      <tr>
+        <td data-label="Identificação"><%= notebook.identificacao %></td>
+        <td data-label="Número Patrimônio"><%= notebook.numero_patrimonio %></td>
+        <td data-label="Estado" class="capitalize"><%= notebook.estado %></td>
+        <td data-label="Ações" class="actions">
+          <%= link_to 'Editar', edit_notebook_path(notebook) %>
+          <% if notebook.estado != 'indisponivel' %>
+            <%= button_to 'Excluir', notebook_path(notebook), method: :delete, data: { confirm: 'Tem certeza?' }, form: { class: "inline-button" }, class: "link-button-danger" %>
+          <% end %>
+          <% if notebook.estado == "emprestado" %>
+            <%= link_to 'Devolução', new_notebook_emprestimo_path(notebook, tipo: 'devolucao'), class: "btn btn-devolucao" %>
+          <% else %>
+            <% if notebook.estado != 'indisponivel' %>
+              <%= link_to 'Novo Empréstimo', new_notebook_emprestimo_path(notebook, tipo: 'emprestimo'), class: "btn btn-emprestimo" %>
+            <% else %>
+              <% if notebook.estado != 'indisponivel' && notebook.estado == 'emprestado'%>
+                <%= link_to "Baixa", new_notebook_emprestimo_path(notebook, tipo: 'baixa'), class: "btn btn-danger" %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+  </div>
+</div>
+

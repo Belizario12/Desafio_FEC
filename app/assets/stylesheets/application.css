@@ -1,0 +1,31 @@
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.toast {
+  background-color: #323232;
+  color: white;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Cores por tipo */
+.toast.notice {
+  background-color: #2563eb;
+}
+
+.toast.alert {
+  background-color: #dc2626;
+}
+
+.toast.fade-out {
+  opacity: 0;
+  transform: translateX(100%);
+}

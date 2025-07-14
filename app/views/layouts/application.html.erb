@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <title><%= content_for(:title) || "Desafio FEC" %></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= favicon_link_tag 'fec_favicon.png' %>
+    <%= stylesheet_link_tag "application", "base", "table", "buttons", "notebook", "layout", "forms", "emprestimos"%>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="nav-container">
+        <%= link_to root_path do %>
+          <%= image_tag 'logo.png', class: 'logo', alt: 'Logo' %>
+        <% end %>
+
+        <nav class="nav-links">
+          <%= link_to "Notebooks", notebooks_path %>
+          <%= link_to "Movimentações", emprestimos_path %>
+        </nav>
+      </div>
+    </header>
+    <main class="app-container">
+      <%= yield %>
+    </main>
+
+    <footer>
+      <p>&copy; Copyright 2025 | Fundação Euclides da Cunha</p>
+    </footer>
+
+    <div id="toast-container">
+      <% flash.each do |type, message| %>
+        <div class="toast <%= type %>"><%= message %></div>
+      <% end %>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const toasts = document.querySelectorAll(".toast");
+        toasts.forEach((toast) => {
+          setTimeout(() => {
+            toast.classList.add("fade-out");
+            toast.addEventListener("transitionend", () => toast.remove());
+          }, 4000); 
+        });
+      });
+    </script>
+  </body>
+</html>

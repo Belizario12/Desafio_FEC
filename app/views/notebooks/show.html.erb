@@ -1,0 +1,28 @@
+<h2>Histórico de movimentações</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tipo</th>
+      <th>Data</th>
+      <th>Colaborador</th>
+      <th>Setor</th>
+      <th>Motivo/Justificativa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @notebook.emprestimos.each do |e| %>
+      <tr>
+        <td><%= e.tipo.capitalize %></td>
+        <td>
+          <%= e.data_emprestimo || e.data_entrega || e.data_baixa %>
+        </td>
+        <td><%= e.colaborador %></td>
+        <td><%= e.setor %></td>
+        <td>
+          <%= e.motivo_devolucao || e.justificativa %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

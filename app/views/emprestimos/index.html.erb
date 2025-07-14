@@ -1,0 +1,47 @@
+<h1 class="text-2xl font-bold mb-6">Movimentações</h1>
+
+<input type="text" id="filtro-movimentacoes" placeholder="Buscar por qualquer campo..." class="p-2 border border-gray-300 rounded w-full max-w-md mb-4" />
+
+<table class="min-w-full bg-white border border-gray-300 rounded-md text-sm">
+  <thead class="bg-blue-600 text-white">
+    <tr>
+      <th class="py-2 px-4">Identificação</th>
+      <th class="py-2 px-4">Número Série</th>
+      <th class="py-2 px-4">Patrimônio</th>
+      <th class="py-2 px-4">Tipo</th>
+      <th class="py-2 px-4">Data</th>
+      <th class="py-2 px-4">Colaborador</th>
+      <th class="py-2 px-4">Setor</th>
+    </tr>
+  </thead>
+  <tbody id="tabela-movimentacoes">
+    <% @emprestimos.each do |emp| %>
+      <tr class="border-b border-gray-200 hover:bg-gray-100">
+        <td class="py-2 px-4"><%= emp.notebook.identificacao %></td>
+        <td class="py-2 px-4"><%= emp.notebook.numero_serie %></td>
+        <td class="py-2 px-4"><%= emp.notebook.numero_patrimonio %></td>
+        <td class="py-2 px-4 capitalize"><%= emp.tipo %></td>
+        <td class="py-2 px-4"><%= emp.data_emprestimo&.strftime("%d/%m/%Y") || emp.data_entrega&.strftime("%d/%m/%Y") || emp.data_baixa&.strftime("%d/%m/%Y") %></td>
+        <td class="py-2 px-4"><%= emp.colaborador %></td>
+        <td class="py-2 px-4"><%= emp.setor %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("filtro-movimentacoes");
+    const linhas = document.querySelectorAll("#tabela-movimentacoes tr");
+
+    input.addEventListener("input", () => {
+      const filtro = input.value.toLowerCase();
+
+      linhas.forEach((linha) => {
+        const textoLinha = linha.textContent.toLowerCase();
+        linha.style.display = textoLinha.includes(filtro) ? "" : "none";
+      });
+    });
+  });
+</script>
+

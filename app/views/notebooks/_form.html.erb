@@ -1,0 +1,64 @@
+<%= form_with(model: notebook, local: true) do |form| %>
+  <% if notebook.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(notebook.errors.count, "erro") %> proibiram este notebook de ser salvo:</h2>
+      <ul>
+        <% notebook.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-grid">
+    <div>
+      <%= form.label :marca %>
+      <%= form.text_field :marca %>
+    </div>
+
+    <div>
+      <%= form.label :modelo %>
+      <%= form.text_field :modelo %>
+    </div>
+
+    <div>
+      <%= form.label :numero_patrimonio, "Número Patrimônio" %>
+      <%= form.text_field :numero_patrimonio %>
+    </div>
+
+    <div>
+      <%= form.label :numero_serie, "Número de Série" %>
+      <%= form.text_field :numero_serie %>
+    </div>
+
+    <div>
+      <%= form.label :identificacao, "Identificação" %>
+      <%= form.text_field :identificacao %>
+    </div>
+
+    <div>
+      <%= form.label :estado %>
+      <%= form.text_field :estado, disabled: true, value: @notebook.estado.capitalize %>
+    </div>
+
+    <div>
+      <%= form.label :data_compra, "Data da Compra" %>
+      <%= form.date_field :data_compra %>
+    </div>
+
+    <div>
+      <%= form.label :data_fabricacao, "Data de Fabricação" %>
+      <%= form.date_field :data_fabricacao %>
+    </div>
+
+    <div class="full-width">
+      <%= form.label :descricao, "Descrição" %>
+      <%= form.text_area :descricao %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit "Salvar", class: "btn btn-primary" %>
+    <%= link_to "Cancelar", notebooks_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

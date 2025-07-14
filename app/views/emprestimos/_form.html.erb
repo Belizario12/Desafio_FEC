@@ -1,0 +1,53 @@
+<%= form_with(model: emprestimo) do |form| %>
+  <% if emprestimo.errors.any? %>
+    <div class="form-errors">
+      <h2><%= pluralize(emprestimo.errors.count, "erro") %> impediram o salvamento:</h2>
+      <ul>
+        <% emprestimo.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if emprestimo.tipo == 'emprestimo' %>
+    <div>
+      <%= form.label :data_emprestimo, "Data do Empréstimo" %>
+      <%= form.date_field :data_emprestimo %>
+    </div>
+
+    <div>
+      <%= form.label :colaborador %>
+      <%= form.text_field :colaborador %>
+    </div>
+
+    <div>
+      <%= form.label :setor %>
+      <%= form.text_field :setor %>
+    </div>
+  <% elsif emprestimo.tipo == 'devolucao' %>
+    <div>
+      <%= form.label :data_entrega, "Data da Devolução" %>
+      <%= form.date_field :data_entrega %>
+    </div>
+
+    <div>
+      <%= form.label :motivo_devolucao %>
+      <%= form.text_area :motivo_devolucao %>
+    </div>
+  <% elsif emprestimo.tipo == 'baixa' %>
+    <div>
+      <%= form.label :data_baixa, "Data da Baixa" %>
+      <%= form.date_field :data_baixa %>
+    </div>
+
+    <div>
+      <%= form.label :justificativa %>
+      <%= form.text_area :justificativa %>
+    </div>
+  <% end %>
+  <div>
+    <%= form.submit "Salvar", class: "btn btn-primary" %>
+    <button type="button" class="btn btn-secondary" onclick="window.location.href='<%= root_path %>'">Cancelar</button>
+  </div>
+<% end %>

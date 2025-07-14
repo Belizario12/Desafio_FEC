@@ -1,0 +1,22 @@
+h3 {
+  margin-top: 2rem;
+  color: #1e40af;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin-bottom: 0.75rem;
+}
+
+ul li a {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+ul li a:hover {
+  color: #1e40af;
+}

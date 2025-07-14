@@ -1,0 +1,72 @@
+<h1 class="titulo-form"><%= @emprestimo.tipo.capitalize %> de Notebook</h1>
+
+<%= form_with(model: [@notebook, @emprestimo], local: true) do |form| %>
+  <% if @emprestimo.errors.any? %>
+    <div class="form-erros">
+      <h2><%= pluralize(@emprestimo.errors.count, "erro") %> impediram o salvamento:</h2>
+      <ul>
+        <% @emprestimo.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :tipo %>
+
+  <div class="form-grid">
+    <% if @emprestimo.tipo == 'emprestimo' %>
+      <div class="form-group">
+        <%= form.label :data_emprestimo, "Data do Empréstimo" %>
+        <%= form.date_field :data_emprestimo %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :colaborador %>
+        <%= form.text_field :colaborador %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :setor %>
+        <%= form.text_field :setor %>
+      </div>
+
+    <% elsif @emprestimo.tipo == 'devolucao' %>
+      <div class="form-group">
+        <%= form.label :data_entrega, "Data da Devolução" %>
+        <%= form.date_field :data_entrega %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :colaborador %>
+        <%= form.text_field :colaborador %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :setor %>
+        <%= form.text_field :setor %>
+      </div>
+
+      <div class="form-group" style="grid-column: span 2;">
+        <%= form.label :motivo_devolucao %>
+        <%= form.text_area :motivo_devolucao %>
+      </div>
+
+    <% elsif @emprestimo.tipo == 'baixa' %>
+      <div class="form-group">
+        <%= form.label :data_baixa, "Data da Baixa" %>
+        <%= form.date_field :data_baixa %>
+      </div>
+
+      <div class="form-group" style="grid-column: span 2;">
+        <%= form.label :justificativa %>
+        <%= form.text_area :justificativa %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit "Salvar", class: "btn btn-primary" %>
+    <%= link_to 'Cancelar', notebooks_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

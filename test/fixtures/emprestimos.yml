@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  notebook: one
+  tipo: MyString
+  data_emprestimo: 2025-07-12
+  colaborador: MyString
+  setor: MyString
+  data_entrega: 2025-07-12
+  motivo_devolucao: MyString
+  data_baixa: 2025-07-12
+  justificativa: MyText
+
+two:
+  notebook: two
+  tipo: MyString
+  data_emprestimo: 2025-07-12
+  colaborador: MyString
+  setor: MyString
+  data_entrega: 2025-07-12
+  motivo_devolucao: MyString
+  data_baixa: 2025-07-12
+  justificativa: MyText
